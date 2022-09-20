@@ -9,13 +9,13 @@ from urllib.parse import parse_qs
 WEBSERVER_PORT = 80
 
 # MQTT Client configuration
-MQTT_BROKER_HOST  = '192.168.99.51'
+MQTT_BROKER_HOST  = '192.168.1.51'
 MQTT_BROKER_PORT  = 1883
 MQTT_CLIENT_ID    = "weatherstation"
 MQTT_TOPIC_PREFIX = "homeassistant"
 MQTT_TOPIC = MQTT_TOPIC_PREFIX + "/weatherstation"
 MQTT_USERNAME = "mqttuser"
-MQTT_PASSWORD = "VbG2ac5Ez"
+MQTT_PASSWORD = "mqttpassword"
 
 # mostly copied + pasted from https://www.emqx.io/blog/how-to-use-mqtt-in-python and some of my own MQTT scripts
 def on_connect(client, userdata, flags, rc):

@@ -1,0 +1,18 @@
+name: "Weather Station to MQTT"
+description: "Intercepts data from Weather Station directed to Weather Underground and publish it trough MQTT"
+version: "0.1.1"
+slug: "Weather_Station_MQTT"
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+startup: application
+services:
+  - "mqtt:need"
+ports:
+  8087/tcp: 8087
+ports_description:
+  8087/tcp: HTTP listening port

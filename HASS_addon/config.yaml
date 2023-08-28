@@ -16,3 +16,13 @@ ports:
   8087/tcp: 8087
 ports_description:
   8087/tcp: HTTP listening port
+options:
+  mqtt_broker_host: "hass_ip"
+  mqtt_broker_port:  1883
+  mqtt_username: "mqttuser"
+  mqtt_password: "mqttpassword"
+schema:
+  mqtt_broker_host: str
+  mqtt_broker_port: int
+  mqtt_username: str
+  mqtt_password: str

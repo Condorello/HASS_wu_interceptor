@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from os import environ
 import http.server
 import socketserver
 import paho.mqtt.client as mqtt
@@ -10,13 +11,15 @@ WEBSERVER_PORT = 8087
 
 # MQTT Client configuration
 
-MQTT_BROKER_HOST  = 'xxx.xxx.xxx.xxx' ## MQTT BROKER
-MQTT_BROKER_PORT  = 1883
+# MQTT Client configuration
+MQTT_BROKER_HOST=os.environ['MQTT_BROKER_HOST']
+MQTT_BROKER_PORT=int(os.environ['MQTT_BROKER_PORT'])
+MQTT_USERNAME=os.environ['MQTT_USERNAME']
+MQTT_PASSWORD=os.environ['MQTT_PASSWORD']
+
 MQTT_CLIENT_ID    = "weatherstation"
 MQTT_TOPIC_PREFIX = "homeassistant"
 MQTT_TOPIC = MQTT_TOPIC_PREFIX + "/weatherstation"
-MQTT_USERNAME = "mqttuser"  ### MQTT BROKER USERNAME
-MQTT_PASSWORD = "mqttpassword"  ### MQTT BROKER PASSWORD
 
 # mostly copied + pasted from https://www.emqx.io/blog/how-to-use-mqtt-in-python and some of my own MQTT scripts
 def on_connect(client, userdata, flags, rc):

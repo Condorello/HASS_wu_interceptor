@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from os import environ
+import os
 import http.server
 import socketserver
 import paho.mqtt.client as mqtt

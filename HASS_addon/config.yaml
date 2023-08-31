@@ -25,4 +25,4 @@ schema:
   mqtt_broker_host: str
   mqtt_broker_port: int
   mqtt_username: str
-  mqtt_password: str
+  mqtt_password: password

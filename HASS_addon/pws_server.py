@@ -65,15 +65,36 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         if 'dewptf' in query_components:
             dew_point = round((float(query_components["dewptf"][0])-32) * 5/9)
             data_array['Dew_point_[C]'] = dew_point
-        if 'winddir' in query_components:
-            wind_dir = int(query_components["winddir"][0])
-            data_array['Wind_direction_[degree]'] = wind_dir
+        if 'windchillf' in query_components:
+            dew_point = round((float(query_components["windchillf"][0])-32) * 5/9)
+            data_array['Wind_chill_[C]'] = wind_chill
+        if 'absbaromin' in query_components:
+            abs_barometric_pressure = round((float(query_components["absbaromin"][0])*33.86389))
+            data_array['Abs_Barometric_pressure_[hpa]'] = abs_barometric_pressure
+        if 'baromin' in query_components:
+            barometric_pressure = round((float(query_components["baromin"][0])*33.86389))
+            data_array['Barometric_pressure_[hpa]'] = barometric_pressure
         if 'windspeedmph' in query_components:
             wind_speed = round((float(query_components["windspeedmph"][0])*1.609344))
             data_array['Wind_speed_[km/h]'] = wind_speed
         if 'windgustmph' in query_components:
             wind_gust_speed = round((float(query_components["windgustmph"][0])*1.609344))
             data_array['Wind_gust_speed_[km/h]'] = wind_gust_speed
+        if 'winddir' in query_components:
+            wind_dir = int(query_components["winddir"][0])
+            data_array['Wind_direction_[degree]'] = wind_dir
+        if 'windspdmph_avg2m' in query_components:
+            wind_speed = round((float(query_components["windspdmph_avg2m"][0])*1.609344))
+            data_array['Wind_speed_average_2minutes[km/h]'] = wind_speed_average_2minutes
+        if 'winddir_avg2m' in query_components:
+            wind_dir = int(query_components["winddir_avg2m"][0])
+            data_array['Wind_direction_average_2minutes[degree]'] = wind_dir_average_2minutes
+        if 'windgustmph_10m' in query_components:
+            wind_gust_speed = round((float(query_components["windgustmph_10m"][0])*1.609344))
+            data_array['Wind_gust_speed_average_10minutes[km/h]'] = wind_gust_speed_average_10minutes
+        if 'windgustdir_10m' in query_components:
+            wind_dir = int(query_components["windgustdir_10m"][0])
+            data_array['Wind_gust_direction_average_10minutes[degree]'] = wind_gust_direction_average_10minutes
         if 'rainin' in query_components:
             rain_rate_in = float(query_components["rainin"][0])
             data_array['Rain_rate_[]'] = rain_rate_in
@@ -93,17 +114,20 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             solar_radiation = float(query_components["solarradiation"][0])
             data_array['Solar_radiation_[W/m^2]'] = solar_radiation
         if 'UV' in query_components:
-            uv_radiation = float(query_components["UV"][0])
-            data_array['UV_[index]'] = uv_radiation
+            uv_index = float(query_components["UV"][0])
+            data_array['UV_[index]'] = uv_index
         if 'indoortempf' in query_components:
             temp_in = round( (float(query_components["indoortempf"][0])-32) * 5/9)
             data_array['Temperature_in_[C]'] = temp_in
         if 'indoorhumidity' in query_components:
             humidity_in = int(query_components["indoorhumidity"][0])
             data_array['Humidity_in_[%]'] = humidity_in
-        if 'baromin' in query_components:
-            barometric_pressure = round((float(query_components["baromin"][0])*33.86389))
-            data_array['Barometric_pressure_[hpa]'] = barometric_pressure
+        if 'temp1f' in query_components:
+            temp_loc1 = round( (float(query_components["temp1f"][0])-32) * 5/9)
+            data_array['Temperature_loc1_[C]'] = temp_loc1
+        if 'humidity1' in query_components:
+            humidity_loc1 = int(query_components["humidity1"][0])
+            data_array['Humidity_loc1[%]'] = humidity_loc1
         if 'lowbatt' in query_components:
             low_battery = int(query_components["lowbatt"][0])
             if low_battery == 0: ##return battery 100% for home assistant 

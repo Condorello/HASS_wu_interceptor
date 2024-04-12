@@ -156,8 +156,8 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         publish(client, MQTT_TOPIC + "/humidity_out", (MyHttpRequestHandler.parse_wu_data(query_components)['Humidity_out_[%]']) )
         publish(client, MQTT_TOPIC + "/dewpoint", (MyHttpRequestHandler.parse_wu_data(query_components)['Dew_point_[C]']) )
         publish(client, MQTT_TOPIC + "/wind_direction", (MyHttpRequestHandler.parse_wu_data(query_components)['Wind_direction_[degree]']) )
-        publish(client, MQTT_TOPIC + "/wind_speed", (MyHttpRequestHandler.parse_wu_data(query_components)['Wind_speed_[km/h]']) )
-        publish(client, MQTT_TOPIC + "/wind_gust_speed", (MyHttpRequestHandler.parse_wu_data(query_components)['Wind_gust_speed_[km/h]']) )
+        publish(client, MQTT_TOPIC + "/wind_speed", (MyHttpRequestHandler.parse_wu_data(query_components)['Wind_speed_[m/s]']) )
+        publish(client, MQTT_TOPIC + "/wind_gust_speed", (MyHttpRequestHandler.parse_wu_data(query_components)['Wind_gust_speed_[m/s]']) )
         publish(client, MQTT_TOPIC + "/rain_rate", (MyHttpRequestHandler.parse_wu_data(query_components)['Rain_rate_[mm/h]']) )
         publish(client, MQTT_TOPIC + "/rain_daily", (MyHttpRequestHandler.parse_wu_data(query_components)['Rain_daily_[mm/d]']) )
         publish(client, MQTT_TOPIC + "/rain_weekly", (MyHttpRequestHandler.parse_wu_data(query_components)['Rain_weekly_[mm/w]']) )
@@ -167,6 +167,7 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         publish(client, MQTT_TOPIC + "/temperature_in", (MyHttpRequestHandler.parse_wu_data(query_components)['Temperature_in_[C]']) )
         publish(client, MQTT_TOPIC + "/humidity_in", (MyHttpRequestHandler.parse_wu_data(query_components)['Humidity_in_[%]']) )
         publish(client, MQTT_TOPIC + "/barometric_pressure", (MyHttpRequestHandler.parse_wu_data(query_components)['Barometric_pressure_[hpa]']) )
+        publish(client, MQTT_TOPIC + "/abs_barometric_pressure", (MyHttpRequestHandler.parse_wu_data(query_components)['Abs_Barometric_pressure_[hpa]']) )
         publish(client, MQTT_TOPIC + "/low_battery", (MyHttpRequestHandler.parse_wu_data(query_components)['Low_battery_[]']) )
 
         # Writing the HTML contents with UTF-8

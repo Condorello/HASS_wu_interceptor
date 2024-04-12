@@ -57,41 +57,41 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
     def parse_wu_data(query_components):
         data_array = {}
         if 'tempf' in query_components:
-            temp_out = round( (float(query_components["tempf"][0])-32) * 5/9)
+            temp_out = round( (float(query_components["tempf"][0])-32) * 5/9,1)
             data_array['Temperature_out_[C]'] = temp_out
         if 'humidity' in query_components:
             humidity_out = int(query_components["humidity"][0])
             data_array['Humidity_out_[%]'] = humidity_out
         if 'dewptf' in query_components:
-            dew_point = round((float(query_components["dewptf"][0])-32) * 5/9)
+            dew_point = round((float(query_components["dewptf"][0])-32) * 5/9,1)
             data_array['Dew_point_[C]'] = dew_point
         if 'windchillf' in query_components:
-            wind_chill = round((float(query_components["windchillf"][0])-32) * 5/9)
+            wind_chill = round((float(query_components["windchillf"][0])-32) * 5/9,1)
             data_array['Wind_chill_[C]'] = wind_chill
         if 'absbaromin' in query_components:
-            abs_barometric_pressure = round((float(query_components["absbaromin"][0])*33.86389))
+            abs_barometric_pressure = round((float(query_components["absbaromin"][0])*33.86389),1)
             data_array['Abs_Barometric_pressure_[hpa]'] = abs_barometric_pressure
         if 'baromin' in query_components:
-            barometric_pressure = round((float(query_components["baromin"][0])*33.86389))
+            barometric_pressure = round((float(query_components["baromin"][0])*33.86389),2)
             data_array['Barometric_pressure_[hpa]'] = barometric_pressure
         if 'windspeedmph' in query_components:
-            wind_speed = round((float(query_components["windspeedmph"][0])*1.609344))
-            data_array['Wind_speed_[km/h]'] = wind_speed
+            wind_speed = round((float(query_components["windspeedmph"][0])*0.44704),2)
+            data_array['Wind_speed_[m/s]'] = wind_speed
         if 'windgustmph' in query_components:
-            wind_gust_speed = round((float(query_components["windgustmph"][0])*1.609344))
-            data_array['Wind_gust_speed_[km/h]'] = wind_gust_speed
+            wind_gust_speed = round((float(query_components["windgustmph"][0])*0.44704),2)
+            data_array['Wind_gust_speed_[m/s]'] = wind_gust_speed
         if 'winddir' in query_components:
             wind_dir = int(query_components["winddir"][0])
             data_array['Wind_direction_[degree]'] = wind_dir
         if 'windspdmph_avg2m' in query_components:
-            wind_speed_average_2minutes = round((float(query_components["windspdmph_avg2m"][0])*1.609344))
-            data_array['Wind_speed_average_2minutes_[km/h]'] = wind_speed_average_2minutes
+            wind_speed_average_2minutes = round((float(query_components["windspdmph_avg2m"][0])*0.44704),2)
+            data_array['Wind_speed_average_2minutes_[m/s]'] = wind_speed_average_2minutes
         if 'winddir_avg2m' in query_components:
             wind_dir_average_2minutes = int(query_components["winddir_avg2m"][0])
             data_array['Wind_direction_average_2minutes_[degree]'] = wind_dir_average_2minutes
         if 'windgustmph_10m' in query_components:
-            wind_gust_speed_average_10minutes = round((float(query_components["windgustmph_10m"][0])*1.609344))
-            data_array['Wind_gust_speed_average_10minutes_[km/h]'] = wind_gust_speed_average_10minutes
+            wind_gust_speed_average_10minutes = round((float(query_components["windgustmph_10m"][0])*0.44704),2)
+            data_array['Wind_gust_speed_average_10minutes_[m/s]'] = wind_gust_speed_average_10minutes
         if 'windgustdir_10m' in query_components:
             wind_gust_direction_average_10minutes = int(query_components["windgustdir_10m"][0])
             data_array['Wind_gust_direction_average_10minutes_[degree]'] = wind_gust_direction_average_10minutes
@@ -117,13 +117,13 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             uv_index = float(query_components["UV"][0])
             data_array['UV_[index]'] = uv_index
         if 'indoortempf' in query_components:
-            temp_in = round( (float(query_components["indoortempf"][0])-32) * 5/9)
+            temp_in = round( (float(query_components["indoortempf"][0])-32) * 5/9,1)
             data_array['Temperature_in_[C]'] = temp_in
         if 'indoorhumidity' in query_components:
             humidity_in = int(query_components["indoorhumidity"][0])
             data_array['Humidity_in_[%]'] = humidity_in
         if 'temp1f' in query_components:
-            temp_loc1 = round( (float(query_components["temp1f"][0])-32) * 5/9)
+            temp_loc1 = round( (float(query_components["temp1f"][0])-32) * 5/9,1)
             data_array['Temperature_loc1_[C]'] = temp_loc1
         if 'humidity1' in query_components:
             humidity_loc1 = int(query_components["humidity1"][0])

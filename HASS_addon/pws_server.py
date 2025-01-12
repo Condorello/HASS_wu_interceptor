@@ -26,9 +26,7 @@ def publish_discovery(client, sensor_name, unit, device_class, value_template="{
     config = {
         "name": f"Weather Station {sensor_name}",
         "state_topic": f"{MQTT_TOPIC}/{sensor_name}",
-        "unit_of_measurement": unit,
         "device_class": device_class,
-        "value_template": value_template,
         "unique_id": f"weather_station_{sensor_name}",
         "device": {
             "identifiers": ["weather_station_1"],
@@ -37,6 +35,15 @@ def publish_discovery(client, sensor_name, unit, device_class, value_template="{
             "manufacturer": "Custom"
         }
     }
+    
+    # Only add unit_of_measurement if it's not None
+    if unit is not None:
+        config["unit_of_measurement"] = unit
+        
+    # Special configuration for timestamp sensor
+    if device_class == "timestamp":
+        config["entity_category"] = "diagnostic"
+        
     discovery_topic = f"{MQTT_TOPIC_PREFIX}/sensor/weather_station/{sensor_name}/config"
     client.publish(discovery_topic, json.dumps(config), retain=True)
 
@@ -168,8 +175,8 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         http_message = str(parsed_data).replace("'", '"')
         html = f"<html><head></head><body><h1>{http_message}</h1></body></html>"
         
-        # Get current timestamp in ISO format and publish it
-        current_time = datetime.now().isoformat()
+        # Get current timestamp in ISO format with timezone
+        current_time = datetime.now().astimezone().isoformat()
         publish(client, f"{MQTT_TOPIC}/last_update", current_time)
         
         # Publish all available data

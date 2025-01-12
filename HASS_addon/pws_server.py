@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 from urllib.parse import parse_qs
 import json
 import sys
+from datetime import datetime
 
 #WEBSERVER PORT
 WEBSERVER_PORT = 8087
@@ -40,6 +41,9 @@ def publish_discovery(client, sensor_name, unit, device_class, value_template="{
     client.publish(discovery_topic, json.dumps(config), retain=True)
 
 def setup_discovery(client):
+    # Add timestamp sensor discovery
+    publish_discovery(client, "last_update", None, "timestamp")
+    
     # Temperature sensors
     publish_discovery(client, "temperature_out", "°C", "temperature")
     publish_discovery(client, "temperature_in", "°C", "temperature")
@@ -60,7 +64,7 @@ def setup_discovery(client):
     publish_discovery(client, "low_battery", "%", "battery")
 
 def on_connect(client, userdata, flags, rc):
-    status = "✓ Connected" if rc == 0 else f"❌ Connection failed (code {rc})"
+    status = "✅ Connected" if rc == 0 else f"❌ Connection failed (code {rc})"
     print(f"{status} to MQTT broker at {MQTT_BROKER_HOST}")
     if rc == 0:
         setup_discovery(client)
@@ -75,7 +79,7 @@ def publish(client, topic, msg):
         
     result = client.publish(topic, msg)
     if result[0] == 0:
-        print(f"✓ {topic}: {msg}")
+        print(f"✅ {topic}: {msg}")
     else:
         print(f"❌ Failed to publish to {topic}")
     
@@ -163,6 +167,10 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         
         http_message = str(parsed_data).replace("'", '"')
         html = f"<html><head></head><body><h1>{http_message}</h1></body></html>"
+        
+        # Get current timestamp in ISO format and publish it
+        current_time = datetime.now().isoformat()
+        publish(client, f"{MQTT_TOPIC}/last_update", current_time)
         
         # Publish all available data
         data_mapping = {

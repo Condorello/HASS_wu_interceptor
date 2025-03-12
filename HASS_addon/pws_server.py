@@ -134,16 +134,16 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             wind_dir = int(query_components["winddir"][0])
             data_array['Wind_direction_[degree]'] = wind_dir
         if 'rainin' in query_components:
-            rain_rate_in = float(query_components["rainin"][0])
+            rain_rate_in = round((float(query_components["rainin"][0])*25.4),2)
             data_array['Rain_rate_[mm/h]'] = rain_rate_in
         if 'dailyrainin' in query_components:
-            rain_daily_in = float(query_components["dailyrainin"][0])
+            rain_daily_in = round((float(query_components["dailyrainin"][0])*25.4),2)
             data_array['Rain_daily_[mm/d]'] = rain_daily_in
         if 'weeklyrainin' in query_components:
-            rain_weekly_in = float(query_components["weeklyrainin"][0])
+            rain_weekly_in = round((float(query_components["weeklyrainin"][0])*25.4),2)
             data_array['Rain_weekly_[mm/w]'] = rain_weekly_in
         if 'monthlyrainin' in query_components:
-            rain_monthly_in = float(query_components["monthlyrainin"][0])
+            rain_monthly_in = round((float(query_components["monthlyrainin"][0])*25.4),2)
             data_array['Rain_monthly_[mm/m]'] = rain_monthly_in
         if 'solarradiation' in query_components:
             solar_radiation = float(query_components["solarradiation"][0])

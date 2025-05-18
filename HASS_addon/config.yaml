@@ -1,5 +1,5 @@
 name: "Weather Station to MQTT"
-description: "Intercepts data from Weather Station directed to Weather Underground and publish it trough MQTT"
+description: "Intercepts data from Weather Station directed to Weather Underground and publish it through MQTT"
 version: "0.2.0"
 slug: "weather_station_mqtt"
 init: false

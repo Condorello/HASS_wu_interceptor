@@ -10,9 +10,7 @@ RUN \
     apk add --no-cache \
          python3 \
              py3-pip \
-     \
-     && pip3 install paho-mqtt
-
+              py3-paho-mqtt
 # Copy root filesystem
 
 #COPY rootfs /
